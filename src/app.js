@@ -9,6 +9,14 @@ var game = new Game(canvas, update, render);
 var image = new Image();
 image.src = 'assets/animals.png';
 
+var blip = new Audio();
+blip.src = 'blip.wav';
+var flip = new Audio();
+flip.src = 'flip.wav';
+var pair = new Audio();
+pair.src = 'pair.src';
+
+
 // We have 9 pairs of possible cards that are about 212px square
 var cards = [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8];
 var board = [];
@@ -31,8 +39,9 @@ canvas.onclick = function(event) {
   var x = Math.floor((event.clientX - 3) / 165);
   var y = Math.floor((event.clientY - 3) / 165);
   var card = board[y * 6 + x];
-  if(!card || card.flip) return;
+  if(!card || card.flip) return blip.play();
   card.flip = true;
+  flip.play();
   switch (state) {
     case "waiting for click 1":
       card1 = card;
